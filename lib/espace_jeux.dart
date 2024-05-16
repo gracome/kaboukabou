@@ -193,10 +193,17 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
           ),
         ),
       ),
-      body: Container(
-        child: Container(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              color: Colors.white,
+            ),
+          ),
+          Expanded(
+       child: SingleChildScrollView(
           padding: EdgeInsets.only(top: 30),
-          color: Colors.white,
+          
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1975,6 +1982,8 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
             ),
           ),
         ),
+          )
+        ]
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
