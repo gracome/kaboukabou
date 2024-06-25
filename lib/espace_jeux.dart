@@ -29,6 +29,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
   String selectedTitle = '';
   String selectedContent = '';
   bool waiting = false;
+  bool success = false;
 
   int _quantity = 1;
 
@@ -40,12 +41,12 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
 
   void toggleWaiting() {
     setState(() {
-      waiting = true; // Met à jour 'waiting' à true
+      waiting = true;
     });
 
     Timer(Duration(seconds: 5), () {
       setState(() {
-        waiting = false; // Remet 'waiting' à false après 5 secondes
+        waiting = false;
       });
     });
   }
@@ -114,7 +115,6 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
               fontSize: 20,
             ),
           ),
-         
           flexibleSpace: Stack(
             children: [
               Positioned.fill(
@@ -123,7 +123,6 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                   fit: BoxFit.cover,
                 ),
               ),
-              // Contenu de la flexibleSpace
               Container(
                 alignment: Alignment.bottomRight,
                 padding: EdgeInsets.only(top: 20, right: 8),
@@ -170,10 +169,10 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                 shape: BoxShape.circle,
                                 color: Color(0xFFFEDE9B),
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "10",
-                                  style: TextStyle(
+                                  success ? "15" : "10",
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400,
@@ -193,17 +192,10 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
           ),
         ),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              color: Colors.white,
-            ),
-          ),
-          Expanded(
-       child: SingleChildScrollView(
+      body: Container(
+        child: Container(
           padding: EdgeInsets.only(top: 30),
-          
+          color: Colors.white,
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -226,13 +218,15 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                       ),
                       elevation: 0,
                       color: Colors.transparent,
-                      child: const Column(
+                      child: Column(
                         children: [
                           SizedBox(height: 10),
                           Center(
                             child: Text(
-                              'Qui était le maire de la commune de Sô-Ava de 2003 à 2008 ? ',
-                              style: TextStyle(
+                              success
+                                  ? 'En quelle année le président Yayi Boni at-il laissé la place à son sucésseur ?'
+                                  : 'Qui était le maire de la commune de Sô-Ava de 2003 à 2008 ? ',
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Riffic',
@@ -249,7 +243,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                 ),
                 const SizedBox(height: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(28),
                       gradient: LinearGradient(
@@ -314,7 +308,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                               Image.asset('assets/images/QuestionA.png'),
                               const SizedBox(width: 20),
                               Text(
-                                'Joseph Onitchango',
+                                success ? '2014' : 'Joseph Onitchango',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
@@ -348,7 +342,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   decoration: BoxDecoration(
@@ -410,7 +404,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                       radius: 38.99,
                                       colors: [
                                         Colors.white.withOpacity(0.9),
-                                        Color(0xFFCED4DA),
+                                        const Color(0xFFCED4DA),
                                       ],
                                     )
                                   : null),
@@ -423,7 +417,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                               Image.asset('assets/images/QuestionB.png'),
                               const SizedBox(width: 20),
                               Text(
-                                'André Oussou Todjè',
+                                success ? '2016' : 'André Oussou Todjè',
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400,
@@ -457,7 +451,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   decoration: BoxDecoration(
@@ -470,7 +464,8 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                         Color(0xFFF5F5F5),
                       ],
                       stops: [0.0604, 0.6432],
-                      transform: GradientRotation(172.2 * 3.1415926535 / 180),
+                      transform:
+                          const GradientRotation(172.2 * 3.1415926535 / 180),
                     ),
                   ),
                   child: ElevatedButton(
@@ -504,17 +499,18 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                         alignment: Alignment.center,
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.all(16.0),
-                                            child: const Text(
-                                              'Message de blocage',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontFamily: 'Riffic',
-                                                fontSize: 24.0,
-                                              ),
-                                            ),
-                                          ),
+                                              padding: EdgeInsets.all(16.0),
+                                              child: const Row(children: [
+                                                Text(
+                                                  'Message de blocage',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontFamily: 'Riffic',
+                                                    fontSize: 24.0,
+                                                  ),
+                                                ),
+                                              ])),
                                         ],
                                       ),
                                       Container(
@@ -546,7 +542,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                             Container(
                                               margin:
                                                   const EdgeInsets.symmetric(
-                                                      horizontal: 12.0),
+                                                      horizontal: 10.0),
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(79),
@@ -581,7 +577,8 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                               onTap: () {
                                                                 setState(() {
                                                                   isActionDone =
-                                                                      !isActionDone;
+                                                                      true;
+                                                                 
                                                                   if (isActionDone) {
                                                                     selectedTitle =
                                                                         'Pack Argent';
@@ -626,40 +623,30 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                     ),
                                                                   ),
                                                                   child:
-                                                                      InkWell(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
+                                                                      Container(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
                                                                             16),
-                                                                    onTap: () {
-                                                                      setState(
-                                                                          () {
-                                                                        isActionDone =
-                                                                            !isActionDone;
-                                                                      });
-                                                                    },
-                                                                    child:
-                                                                        Container(
-                                                                      padding: const EdgeInsets
-                                                                          .symmetric(
-                                                                          horizontal:
-                                                                              16),
-                                                                      child:
-                                                                          Row(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.spaceBetween,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                Row(
-                                                                              children: [
-                                                                                Image.asset(
-                                                                                  'assets/images/jetonAgent.png',
-                                                                                  width: 40,
-                                                                                  height: 40,
-                                                                                  fit: BoxFit.contain,
-                                                                                ),
-                                                                                const SizedBox(width: 20),
-                                                                                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              Row(
+                                                                            children: [
+                                                                              Image.asset(
+                                                                                'assets/images/jetonAgent.png',
+                                                                                width: 40,
+                                                                                height: 40,
+                                                                                fit: BoxFit.contain,
+                                                                              ),
+                                                                              const SizedBox(width: 20),
+                                                                              Column(
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
                                                                                   const SizedBox(height: 8),
                                                                                   const Text(
                                                                                     'Pack Argent',
@@ -688,46 +675,50 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                                     ),
                                                                                   ),
                                                                                   const SizedBox(height: 8),
-                                                                                ])
+                                                                                ],
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                        Container(
+                                                                          height:
+                                                                              35,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(500),
+                                                                            gradient:
+                                                                                const LinearGradient(
+                                                                              begin: Alignment.topRight,
+                                                                              end: Alignment.bottomLeft,
+                                                                              colors: [
+                                                                                Color(0xFF362677),
+                                                                                Color(0xFF6341D8),
                                                                               ],
                                                                             ),
                                                                           ),
-                                                                          Container(
-                                                                            height:
-                                                                                35,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              borderRadius: BorderRadius.circular(500),
-                                                                              gradient: const LinearGradient(
-                                                                                begin: Alignment.topRight,
-                                                                                end: Alignment.bottomLeft,
-                                                                                colors: [
-                                                                                  Color(0xFF362677),
-                                                                                  Color(0xFF6341D8),
-                                                                                ],
-                                                                              ),
+                                                                          child:
+                                                                              const Padding(
+                                                                            padding:
+                                                                                EdgeInsets.symmetric(
+                                                                              vertical: 8,
+                                                                              horizontal: 8,
                                                                             ),
                                                                             child:
-                                                                                const Padding(
-                                                                              padding: EdgeInsets.symmetric(
-                                                                                vertical: 8,
-                                                                                horizontal: 8,
-                                                                              ),
-                                                                              child: Center(
-                                                                                child: Text(
-                                                                                  '100 FCFA',
-                                                                                  style: TextStyle(
-                                                                                    color: Colors.white,
-                                                                                    fontSize: 14,
-                                                                                    fontFamily: 'Riffic',
-                                                                                  ),
-                                                                                  textAlign: TextAlign.center,
+                                                                                Center(
+                                                                              child: Text(
+                                                                                '100 FCFA',
+                                                                                style: TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 14,
+                                                                                  fontFamily: 'Riffic',
                                                                                 ),
+                                                                                textAlign: TextAlign.center,
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                        ],
-                                                                      ),
+                                                                        ),
+                                                                      ],
                                                                     ),
                                                                   ),
                                                                 ),
@@ -752,7 +743,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                 child: Ink(
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: Color(
+                                                                    color: const Color(
                                                                             0xFFDBD0FF)
                                                                         .withOpacity(
                                                                             0.3),
@@ -941,6 +932,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
+                                                                          isActionDone?
                                                                       showModalBottomSheet(
                                                                         context:
                                                                             context,
@@ -1407,7 +1399,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                             ),
                                                                           );
                                                                         },
-                                                                      );
+                                                                      ) : null;
                                                                     },
                                                                     style:
                                                                         ButtonStyle(
@@ -1518,28 +1510,17 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                if (isActionDone)
+                                                                if (!isActionDone)
                                                                   Positioned
                                                                       .fill(
                                                                     child:
-                                                                        Material(
-                                                                      color: const Color
-                                                                          .fromARGB(
-                                                                          0,
-                                                                          170,
-                                                                          27,
-                                                                          27),
-                                                                      child:
-                                                                          InkWell(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(79),
-                                                                        onTap:
-                                                                            () {
-                                                                          // Action à effectuer lorsque l'overlay est cliqué
-                                                                        },
-                                                                      ),
+                                                                        Container(
+                                                                      color: Colors
+                                                                          .white
+                                                                          .withOpacity(
+                                                                              0.5),
                                                                     ),
-                                                                  )
+                                                                  ),
                                                               ],
                                                             ),
                                                             const SizedBox(
@@ -1607,7 +1588,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                           style: TextStyle(
                                                               color: Color(
                                                                   0xFF853D1A),
-                                                              fontSize: 18.0,
+                                                              fontSize: 16.0,
                                                               fontFamily:
                                                                   'Riffic',
                                                               fontWeight:
@@ -1617,7 +1598,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                       ),
                                                     ),
                                                     Positioned(
-                                                      top: 5.0,
+                                                      top: 2.0,
                                                       right: 8.0,
                                                       child: Row(
                                                         children: [
@@ -1625,16 +1606,18 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                             width: 10,
                                                             height: 15,
                                                             transform: Matrix4
-                                                                .rotationZ(30.02 *
+                                                                .rotationZ(65.02 *
                                                                     3.1415926535 /
                                                                     180),
-                                                            decoration:
-                                                                const BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              color:
-                                                                  Colors.white,
-                                                            ),
+                                                            decoration: BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .rectangle,
+                                                                color: Colors
+                                                                    .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            500)),
                                                           ),
                                                           const SizedBox(
                                                               width: 2.0),
@@ -1717,9 +1700,9 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                               const SizedBox(width: 20),
                               Image.asset('assets/images/QuestionC.png'),
                               const SizedBox(width: 20),
-                              const Text(
-                                'Jean Méjor Zannou',
-                                style: TextStyle(
+                              Text(
+                                success ? '2006' : 'Jean Méjor Zannou',
+                                style: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w400,
                                     color: Color(0xFF070707),
@@ -1752,174 +1735,23 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                 ),
                 const SizedBox(height: 30),
                 Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/ClipOvale.png'),
-                          fit: BoxFit.cover,
-                        ),
+                    child: SingleChildScrollView(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/ClipOvale.png'),
+                        fit: BoxFit.contain,
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          children: [
-                            
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Expanded(
-                                  child: Column(children: [
-                                    Card(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(18),
-                                          topRight: Radius.circular(18),
-                                          bottomLeft: Radius.circular(18),
-                                          bottomRight: Radius.circular(18),
-                                        ),
-                                      ),
-                                      color: Color(0xFFDBD0FF),
-                                      child: SizedBox(
-                                        width: 76,
-                                        height: 76,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            Image.asset(
-                                              'assets/images/Attribution.png',
-                                              width: 28,
-                                              height: 28,
-                                            ),
-                                            const SizedBox(height: 10),
-                                            const Text(
-                                              '1222',
-                                              style: TextStyle(
-                                                  fontFamily: 'Riffic',
-                                                  fontSize: 14,
-                                                  color: Color(0xFF6341D8)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      "Nombre de points",
-                                      style: TextStyle(
-                                          fontFamily: 'Riffic',
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ]),
-                                ),
-                                Expanded(
-                                  child: Column(children: [
-                                    Card(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(18),
-                                          topRight: Radius.circular(18),
-                                          bottomLeft: Radius.circular(18),
-                                          bottomRight: Radius.circular(18),
-                                        ),
-                                      ),
-                                      color: Color(0xFFDBD0FF),
-                                      child: SizedBox(
-                                        width: 76,
-                                        height: 76,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            Image.asset(
-                                              'assets/images/Icon.png',
-                                              width: 28,
-                                              height: 28,
-                                            ),
-                                            const SizedBox(height: 10),
-                                            const Text(
-                                              '102e',
-                                              style: TextStyle(
-                                                  fontFamily: 'Riffic',
-                                                  fontSize: 14,
-                                                  color: Color(0xFF6341D8)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      "Rang",
-                                      style: TextStyle(
-                                          fontFamily: 'Riffic',
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ]),
-                                ),
-                                Expanded(
-                                  child: Column(children: [
-                                    Card(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(18),
-                                          topRight: Radius.circular(18),
-                                          bottomLeft: Radius.circular(18),
-                                          bottomRight: Radius.circular(18),
-                                        ),
-                                      ),
-                                      color: Color(0xFFDBD0FF),
-                                      child: SizedBox(
-                                        width: 76,
-                                        height: 76,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            Image.asset(
-                                              'assets/images/jetons.png',
-                                              width: 28,
-                                              height: 28,
-                                            ),
-                                            const SizedBox(height: 10),
-                                            const Text(
-                                              '36',
-                                              style: TextStyle(
-                                                  fontFamily: 'Riffic',
-                                                  fontSize: 14,
-                                                  color: Color(0xFF6341D8)),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      "Jetons Restants",
-                                      style: TextStyle(
-                                          fontFamily: 'Riffic',
-                                          fontSize: 14,
-                                          color: Colors.white),
-                                      softWrap: true,
-                                      maxLines: 2,
-                                      textAlign: TextAlign.center,
-                                    )
-                                  ]),
-                                ),
-                                Expanded(
-                                    child: Column(children: [
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(0.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Expanded(
+                                child: Column(children: [
                                   Card(
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
@@ -1929,7 +1761,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                         bottomRight: Radius.circular(18),
                                       ),
                                     ),
-                                    color: const Color(0xFFDBD0FF),
+                                    color: Color(0xFFDBD0FF),
                                     child: SizedBox(
                                       width: 76,
                                       height: 76,
@@ -1939,7 +1771,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                         children: [
                                           const SizedBox(height: 10),
                                           Image.asset(
-                                            'assets/images/mauvaise_reponse.png',
+                                            'assets/images/Attribution.png',
                                             width: 28,
                                             height: 28,
                                           ),
@@ -1950,7 +1782,6 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                                 fontFamily: 'Riffic',
                                                 fontSize: 14,
                                                 color: Color(0xFF6341D8)),
-                                            textAlign: TextAlign.center,
                                           )
                                         ],
                                       ),
@@ -1958,7 +1789,7 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                   ),
                                   const SizedBox(height: 10),
                                   const Text(
-                                    "Mauvais réponses",
+                                    "Nombre de points",
                                     style: TextStyle(
                                         fontFamily: 'Riffic',
                                         fontSize: 14,
@@ -1967,111 +1798,403 @@ class _EspaceJeuxPageState extends State<EspaceJeuxPage> {
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                   )
-                                ])),
+                                ]),
+                              ),
+                              Expanded(
+                                child: Column(children: [
+                                  Card(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        topRight: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                        bottomRight: Radius.circular(18),
+                                      ),
+                                    ),
+                                    color: Color(0xFFDBD0FF),
+                                    child: SizedBox(
+                                      width: 76,
+                                      height: 76,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Image.asset(
+                                            'assets/images/Icon.png',
+                                            width: 28,
+                                            height: 28,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Text(
+                                            '102e',
+                                            style: TextStyle(
+                                                fontFamily: 'Riffic',
+                                                fontSize: 14,
+                                                color: Color(0xFF6341D8)),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "Rang",
+                                    style: TextStyle(
+                                        fontFamily: 'Riffic',
+                                        fontSize: 14,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 20),
+                                ]),
+                              ),
+                              Expanded(
+                                child: Column(children: [
+                                  Card(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        topRight: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                        bottomRight: Radius.circular(18),
+                                      ),
+                                    ),
+                                    color: Color(0xFFDBD0FF),
+                                    child: SizedBox(
+                                      width: 76,
+                                      height: 76,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(height: 10),
+                                          Image.asset(
+                                            'assets/images/jetons.png',
+                                            width: 28,
+                                            height: 28,
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Text(
+                                            '36',
+                                            style: TextStyle(
+                                                fontFamily: 'Riffic',
+                                                fontSize: 14,
+                                                color: Color(0xFF6341D8)),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "Jetons Restants",
+                                    style: TextStyle(
+                                        fontFamily: 'Riffic',
+                                        fontSize: 14,
+                                        color: Colors.white),
+                                    softWrap: true,
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                  )
+                                ]),
+                              ),
+                              Expanded(
+                                  child: Column(children: [
+                                Card(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(18),
+                                      topRight: Radius.circular(18),
+                                      bottomLeft: Radius.circular(18),
+                                      bottomRight: Radius.circular(18),
+                                    ),
+                                  ),
+                                  color: const Color(0xFFDBD0FF),
+                                  child: SizedBox(
+                                    width: 76,
+                                    height: 76,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const SizedBox(height: 10),
+                                        Image.asset(
+                                          'assets/images/mauvaise_reponse.png',
+                                          width: 28,
+                                          height: 28,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        const Text(
+                                          '1222',
+                                          style: TextStyle(
+                                              fontFamily: 'Riffic',
+                                              fontSize: 14,
+                                              color: Color(0xFF6341D8)),
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
                                 const SizedBox(height: 10),
-                              ],
-                            ),
-                            SizedBox(height: 96),
-                          ],
-                        ),
+                                const Text(
+                                  "Mauvais réponses",
+                                  style: TextStyle(
+                                      fontFamily: 'Riffic',
+                                      fontSize: 14,
+                                      color: Colors.white),
+                                  softWrap: true,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                )
+                              ])),
+                              const SizedBox(height: 10),
+                            ],
+                          ),
+                          const SizedBox(height: 150),
+                        ],
                       ),
                     ),
                   ),
-                ),
+                ))
+                // Expanded(
+                //   child: SingleChildScrollView(
+                //     child: Container(
+                //       decoration: const BoxDecoration(
+                //         image: DecorationImage(
+                //           image: AssetImage('assets/images/ClipOvale.png'),
+                //           fit: BoxFit.cover,
+                //         ),
+                //       ),
+                //       child: Padding(
+                //         padding: EdgeInsets.all(10.0),
+                //         child: Column(
+                //           children: [
+                //             Row(
+                //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //               children: [
+                //                 Expanded(
+                //                   child: Column(children: [
+                //                     Card(
+                //                       shape: const RoundedRectangleBorder(
+                //                         borderRadius: BorderRadius.only(
+                //                           topLeft: Radius.circular(18),
+                //                           topRight: Radius.circular(18),
+                //                           bottomLeft: Radius.circular(18),
+                //                           bottomRight: Radius.circular(18),
+                //                         ),
+                //                       ),
+                //                       color: Color(0xFFDBD0FF),
+                //                       child: SizedBox(
+                //                         width: 76,
+                //                         height: 76,
+                //                         child: Column(
+                //                           crossAxisAlignment:
+                //                               CrossAxisAlignment.center,
+                //                           children: [
+                //                             const SizedBox(height: 10),
+                //                             Image.asset(
+                //                               'assets/images/Attribution.png',
+                //                               width: 28,
+                //                               height: 28,
+                //                             ),
+                //                             const SizedBox(height: 10),
+                //                             const Text(
+                //                               '1222',
+                //                               style: TextStyle(
+                //                                   fontFamily: 'Riffic',
+                //                                   fontSize: 14,
+                //                                   color: Color(0xFF6341D8)),
+                //                             )
+                //                           ],
+                //                         ),
+                //                       ),
+                //                     ),
+                //                     const SizedBox(height: 10),
+                //                     const Text(
+                //                       "Nombre de points",
+                //                       style: TextStyle(
+                //                           fontFamily: 'Riffic',
+                //                           fontSize: 14,
+                //                           color: Colors.white),
+                //                       softWrap: true,
+                //                       maxLines: 2,
+                //                       textAlign: TextAlign.center,
+                //                     )
+                //                   ]),
+                //                 ),
+                //                 Expanded(
+                //                   child: Column(children: [
+                //                     Card(
+                //                       shape: const RoundedRectangleBorder(
+                //                         borderRadius: BorderRadius.only(
+                //                           topLeft: Radius.circular(18),
+                //                           topRight: Radius.circular(18),
+                //                           bottomLeft: Radius.circular(18),
+                //                           bottomRight: Radius.circular(18),
+                //                         ),
+                //                       ),
+                //                       color: Color(0xFFDBD0FF),
+                //                       child: SizedBox(
+                //                         width: 76,
+                //                         height: 76,
+                //                         child: Column(
+                //                           crossAxisAlignment:
+                //                               CrossAxisAlignment.center,
+                //                           children: [
+                //                             const SizedBox(height: 10),
+                //                             Image.asset(
+                //                               'assets/images/Icon.png',
+                //                               width: 28,
+                //                               height: 28,
+                //                             ),
+                //                             const SizedBox(height: 10),
+                //                             const Text(
+                //                               '102e',
+                //                               style: TextStyle(
+                //                                   fontFamily: 'Riffic',
+                //                                   fontSize: 14,
+                //                                   color: Color(0xFF6341D8)),
+                //                             )
+                //                           ],
+                //                         ),
+                //                       ),
+                //                     ),
+                //                     const SizedBox(height: 10),
+                //                     const Text(
+                //                       "Rang",
+                //                       style: TextStyle(
+                //                           fontFamily: 'Riffic',
+                //                           fontSize: 14,
+                //                           color: Colors.white),
+                //                       softWrap: true,
+                //                       maxLines: 2,
+                //                       textAlign: TextAlign.center,
+                //                     )
+                //                   ]),
+                //                 ),
+                //                 Expanded(
+                //                   child: Column(children: [
+                //                     Card(
+                //                       shape: const RoundedRectangleBorder(
+                //                         borderRadius: BorderRadius.only(
+                //                           topLeft: Radius.circular(18),
+                //                           topRight: Radius.circular(18),
+                //                           bottomLeft: Radius.circular(18),
+                //                           bottomRight: Radius.circular(18),
+                //                         ),
+                //                       ),
+                //                       color: Color(0xFFDBD0FF),
+                //                       child: SizedBox(
+                //                         width: 76,
+                //                         height: 76,
+                //                         child: Column(
+                //                           crossAxisAlignment:
+                //                               CrossAxisAlignment.center,
+                //                           children: [
+                //                             const SizedBox(height: 10),
+                //                             Image.asset(
+                //                               'assets/images/jetons.png',
+                //                               width: 28,
+                //                               height: 28,
+                //                             ),
+                //                             const SizedBox(height: 10),
+                //                             const Text(
+                //                               '36',
+                //                               style: TextStyle(
+                //                                   fontFamily: 'Riffic',
+                //                                   fontSize: 14,
+                //                                   color: Color(0xFF6341D8)),
+                //                             )
+                //                           ],
+                //                         ),
+                //                       ),
+                //                     ),
+                //                     const SizedBox(height: 10),
+                //                     const Text(
+                //                       "Jetons Restants",
+                //                       style: TextStyle(
+                //                           fontFamily: 'Riffic',
+                //                           fontSize: 14,
+                //                           color: Colors.white),
+                //                       softWrap: true,
+                //                       maxLines: 2,
+                //                       textAlign: TextAlign.center,
+                //                     )
+                //                   ]),
+                //                 ),
+                //                 Expanded(
+                //                     child: Column(children: [
+                //                   Card(
+                //                     shape: const RoundedRectangleBorder(
+                //                       borderRadius: BorderRadius.only(
+                //                         topLeft: Radius.circular(18),
+                //                         topRight: Radius.circular(18),
+                //                         bottomLeft: Radius.circular(18),
+                //                         bottomRight: Radius.circular(18),
+                //                       ),
+                //                     ),
+                //                     color: const Color(0xFFDBD0FF),
+                //                     child: SizedBox(
+                //                       width: 76,
+                //                       height: 76,
+                //                       child: Column(
+                //                         crossAxisAlignment:
+                //                             CrossAxisAlignment.center,
+                //                         children: [
+                //                           const SizedBox(height: 10),
+                //                           Image.asset(
+                //                             'assets/images/mauvaise_reponse.png',
+                //                             width: 28,
+                //                             height: 28,
+                //                           ),
+                //                           const SizedBox(height: 10),
+                //                           const Text(
+                //                             '1222',
+                //                             style: TextStyle(
+                //                                 fontFamily: 'Riffic',
+                //                                 fontSize: 14,
+                //                                 color: Color(0xFF6341D8)),
+                //                             textAlign: TextAlign.center,
+                //                           )
+                //                         ],
+                //                       ),
+                //                     ),
+                //                   ),
+                //                   const SizedBox(height: 10),
+                //                   const Text(
+                //                     "Mauvais réponses",
+                //                     style: TextStyle(
+                //                         fontFamily: 'Riffic',
+                //                         fontSize: 14,
+                //                         color: Colors.white),
+                //                     softWrap: true,
+                //                     maxLines: 2,
+                //                     textAlign: TextAlign.center,
+                //                   )
+                //                 ])),
+                //                 const SizedBox(height: 10),
+                //               ],
+                //             ),
+                //             SizedBox(height: 96),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
         ),
-          )
-        ]
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
-  }
-}
-
-class CustomAppBarShape extends ContinuousRectangleBorder {
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    double radius = 20; // Rayon de la courbe
-    double midWidth = rect.width / 2; // Largeur du milieu
-    double bottomOffset = 8; // Décalage vers le bas
-
-    Path path = Path();
-    path.lineTo(0, rect.height); // Coin inférieur gauche
-    path.lineTo(
-        midWidth - radius, rect.height); // Coin inférieur gauche de la courbe
-    path.quadraticBezierTo(midWidth, rect.height + radius + bottomOffset,
-        midWidth + radius, rect.height); // Courbe
-    path.lineTo(rect.width, rect.height); // Coin inférieur droit de la courbe
-    path.lineTo(rect.width, 0); // Coin supérieur droit
-    path.close(); // Fermeture du chemin
-
-    return path;
-  }
-}
-
-// class BottomCurvePainter extends CustomPainter {
-//   @override
-//   void paint(Canvas canvas, Size size) {
-//     final paint = Paint()
-//       ..color = Colors.transparent
-//       ..style = PaintingStyle.fill;
-
-//     final path = Path();
-//     path.moveTo(0, size.height); // Déplacer au coin inférieur gauche
-//     path.quadraticBezierTo(size.width / 2, size.height * 2 / 3, size.width, size.height); // Courbe quadratique au coin inférieur droit
-//     path.lineTo(size.width, 0); // Ligne droite au coin supérieur droit
-//     path.lineTo(0, 0); // Ligne droite au coin supérieur gauche
-//     path.close(); // Fermer le chemin pour former une forme fermée
-
-//     canvas.drawPath(path, paint);
-//   }
-
-//   @override
-//   bool shouldRepaint(CustomPainter oldDelegate) {
-//     return false;
-//   }
-// }
-
-class _OvalTopClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    double curveHeight = size.height / 5;
-    path.moveTo(0, curveHeight);
-    path.quadraticBezierTo(size.width / 2, 0, size.width, curveHeight);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}
-
-class _OvalClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    double curveHeight = size.height / 5;
-    path.moveTo(0, curveHeight);
-    path.quadraticBezierTo(size.width / 2, 0, size.width, curveHeight);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }
 
@@ -2211,6 +2334,7 @@ class TimerOffCanvasBottomPaiements extends StatefulWidget {
 class _TimerOffCanvasBottomPaiementsState
     extends State<TimerOffCanvasBottomPaiements> {
   bool waiting = true;
+  bool echec = false;
 
   @override
   void initState() {
@@ -2218,6 +2342,11 @@ class _TimerOffCanvasBottomPaiementsState
     Timer(Duration(seconds: 5), () {
       setState(() {
         waiting = false;
+        Timer(Duration(seconds: 5), () {
+          setState(() {
+            echec = true;
+          });
+        });
       });
     });
   }
@@ -2241,7 +2370,9 @@ class _TimerOffCanvasBottomPaiementsState
               children: [
                 waiting
                     ? Image.asset('assets/images/Animation-Waiting.png')
-                    : Image.asset('assets/images/Succès.png')
+                    : echec
+                        ? Image.asset('assets/images/Echec.png')
+                        : Image.asset('assets/images/Succès.png')
               ],
             ),
           ),
@@ -2263,16 +2394,27 @@ class _TimerOffCanvasBottomPaiementsState
                         ),
                         textAlign: TextAlign.center,
                       )
-                    : const Text(
-                        'Paiement réussi',
-                        style: TextStyle(
-                          color: Color(0xFF362677),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Riffic',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                    : echec
+                        ? const Text(
+                            'Echec de paiement',
+                            style: TextStyle(
+                              color: Color(0xFF362677),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Riffic',
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        : const Text(
+                            'Paiement réussi',
+                            style: TextStyle(
+                              color: Color(0xFF362677),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Riffic',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                 const SizedBox(height: 10),
                 waiting
                     ? const Text(
@@ -2285,16 +2427,27 @@ class _TimerOffCanvasBottomPaiementsState
                         ),
                         textAlign: TextAlign.start,
                       )
-                    : const Text(
-                        'Votre paiement de 1000 FCFA a été effectué avec succès',
-                        style: TextStyle(
-                          color: Color(0xFF717985),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Montserrat',
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
+                    : echec
+                        ? const Text(
+                            'Votre paiement de 1000 FCFA a été effectué avec succès',
+                            style: TextStyle(
+                              color: Color(0xFF717985),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Montserrat',
+                            ),
+                            textAlign: TextAlign.start,
+                          )
+                        : const Text(
+                            'votre paiement de 1000 FCFA n’a pas été éffectué  ',
+                            style: TextStyle(
+                              color: Color(0xFF717985),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Montserrat',
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
                 const SizedBox(height: 10),
                 if (!waiting)
                   Container(
@@ -2319,186 +2472,186 @@ class _TimerOffCanvasBottomPaiementsState
                           context: context,
                           builder: (BuildContext context) {
                             return Dialog(
-                              backgroundColor: Colors.transparent,
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Image.asset(
-                                      'assets/images/party.png', // Chemin de votre image
-                                      fit: BoxFit.cover,
-                                      height: 150, // Hauteur de l'image
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                          Color(0xFF6341D8),
-                                          Color(0xFF362677),
-                                        ],
+                                backgroundColor: Colors.transparent,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: Image.asset(
+                                        'assets/images/party.png',
+                                        fit: BoxFit.cover,
                                       ),
-                                      borderRadius: BorderRadius.circular(28.0),
                                     ),
-                                    padding: EdgeInsets.all(16.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.all(16.0),
-                                              child: const Text(
-                                                'Félicitations',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                  fontFamily: 'Riffic',
-                                                  fontSize: 18.0,
-                                                ),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              right: -25.0,
-                                              child: IconButton(
-                                                icon: Icon(Icons.close),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                            ),
+                                    Container(
+                                      margin: const EdgeInsets.only(
+                                          top: 150, bottom: 200),
+                                      decoration: BoxDecoration(
+                                        gradient: const LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                            Color(0xFF6341D8),
+                                            Color(0xFF362677),
                                           ],
                                         ),
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                              bottomLeft: Radius.circular(16.0),
-                                              bottomRight:
-                                                  Radius.circular(16.0),
-                                              topLeft: Radius.circular(16.0),
-                                              topRight: Radius.circular(16.0),
-                                            ),
-                                          ),
-                                          padding: EdgeInsets.all(16.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
+                                        borderRadius:
+                                            BorderRadius.circular(28.0),
+                                      ),
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Stack(
+                                            alignment: Alignment.center,
                                             children: [
-                                              Text(
-                                                "Vous avez acheter des jetons de 1000 FCFA donnant droit à 100 questions avec un temps de réponse de 15 sécondes chacune.",
-                                                style: TextStyle(
+                                              Container(
+                                                padding: EdgeInsets.all(16.0),
+                                                child: const Text(
+                                                  'Félicitations',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                    fontFamily: 'Riffic',
+                                                    fontSize: 18.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                            ),
+                                            padding: EdgeInsets.all(16.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: [
+                                                Text(
+                                                  "Vous avez acheté des jetons de 1000 FCFA donnant droit à 100 questions avec un temps de réponse de 15 secondes chacune.",
+                                                  style: TextStyle(
                                                     fontSize: 14,
                                                     fontFamily: 'Montserrat',
                                                     color: Color(0xFF362677)
                                                         .withOpacity(0.7),
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              SizedBox(height: 10.0),
-                                              Text(
-                                                "Cliquer sur “Ok” pour reprendre votre partie ",
-                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                SizedBox(height: 10.0),
+                                                Text(
+                                                  "Cliquer sur “Ok” pour reprendre votre partie",
+                                                  style: TextStyle(
                                                     fontSize: 16.0,
                                                     fontFamily: 'Montserrat',
                                                     color: Color(0xFF362677)
                                                         .withOpacity(0.7),
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              SizedBox(height: 10.0),
-                                              Container(
-                                                margin:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 16.0),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(79),
-                                                  gradient:
-                                                      const LinearGradient(
-                                                    begin: Alignment.centerLeft,
-                                                    end: Alignment.centerRight,
-                                                    colors: [
-                                                      Color(0xFFFFFD00),
-                                                      Color(0xFFFF8500),
-                                                    ],
-                                                    stops: [0.0604, 0.6432],
-                                                    transform: GradientRotation(
-                                                        172.2 *
-                                                            3.1415926535 /
-                                                            180),
+                                                    fontWeight: FontWeight.w700,
                                                   ),
+                                                  textAlign: TextAlign.center,
                                                 ),
-                                                child: ElevatedButton(
-                                                  onPressed: () {},
-                                                  style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                      Color(0xFFCD9777),
-                                                    ),
-                                                    shape: MaterialStateProperty
-                                                        .all<OutlinedBorder>(
-                                                      RoundedRectangleBorder(
-                                                        side: const BorderSide(
-                                                          color:
-                                                              Color(0xFFCD9777),
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(79.0),
-                                                      ),
-                                                    ),
-                                                    padding:
-                                                        MaterialStateProperty.all<
-                                                            EdgeInsetsGeometry>(
-                                                      const EdgeInsets.only(
-                                                        left: 12.0,
-                                                        right: 12.0,
-                                                        top: 5.0,
-                                                        bottom: 8.0,
-                                                      ),
+                                                SizedBox(height: 10.0),
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 16.0),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            79),
+                                                    gradient:
+                                                        const LinearGradient(
+                                                      begin:
+                                                          Alignment.centerLeft,
+                                                      end:
+                                                          Alignment.centerRight,
+                                                      colors: [
+                                                        Color(0xFFFFFD00),
+                                                        Color(0xFFFF8500),
+                                                      ],
+                                                      stops: [0.0604, 0.6432],
+                                                      transform:
+                                                          GradientRotation(
+                                                              172.2 *
+                                                                  3.1415926535 /
+                                                                  180),
                                                     ),
                                                   ),
-                                                  child: Stack(
-                                                    alignment: Alignment.center,
-                                                    children: [
-                                                      Container(
-                                                        decoration:
-                                                            BoxDecoration(
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                        Color(0xFFCD9777),
+                                                      ),
+                                                      shape: MaterialStateProperty
+                                                          .all<OutlinedBorder>(
+                                                        RoundedRectangleBorder(
+                                                          side:
+                                                              const BorderSide(
+                                                            color: Color(
+                                                                0xFFCD9777),
+                                                          ),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
                                                                       79.0),
-                                                          gradient:
-                                                              const LinearGradient(
-                                                            begin: Alignment
-                                                                .topRight,
-                                                            end: Alignment
-                                                                .centerRight,
-                                                            colors: [
-                                                              Color(0xFFFFFD00),
-                                                              Color(0xFFFF8500),
-                                                            ],
-                                                          ),
                                                         ),
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                vertical: 10.0),
-                                                        child: const Center(
-                                                          child: Text(
-                                                            'OK',
-                                                            style: TextStyle(
+                                                      ),
+                                                      padding:
+                                                          MaterialStateProperty.all<
+                                                              EdgeInsetsGeometry>(
+                                                        const EdgeInsets.only(
+                                                          left: 12.0,
+                                                          right: 12.0,
+                                                          top: 5.0,
+                                                          bottom: 8.0,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    child: Stack(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      children: [
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        79.0),
+                                                            gradient:
+                                                                const LinearGradient(
+                                                              begin: Alignment
+                                                                  .topRight,
+                                                              end: Alignment
+                                                                  .centerRight,
+                                                              colors: [
+                                                                Color(
+                                                                    0xFFFFFD00),
+                                                                Color(
+                                                                    0xFFFF8500),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  vertical:
+                                                                      10.0),
+                                                          child: const Center(
+                                                            child: Text(
+                                                              'OK',
+                                                              style: TextStyle(
                                                                 color: Color(
                                                                     0xFF853D1A),
                                                                 fontSize: 16.0,
@@ -2506,63 +2659,104 @@ class _TimerOffCanvasBottomPaiementsState
                                                                     'Riffic',
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold),
+                                                                        .bold,
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Positioned(
-                                                        top: 5.0,
-                                                        right: 8.0,
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              width: 10,
-                                                              height: 15,
-                                                              transform: Matrix4
-                                                                  .rotationZ(30.02 *
-                                                                      3.1415926535 /
-                                                                      180),
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                color: Colors
-                                                                    .white,
+                                                        Positioned(
+                                                          top: 5.0,
+                                                          right: 8.0,
+                                                          child: Row(
+                                                            children: [
+                                                              Container(
+                                                                width: 10,
+                                                                height: 15,
+                                                                transform: Matrix4
+                                                                    .rotationZ(
+                                                                        65.02 *
+                                                                            3.1415926535 /
+                                                                            180),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .rectangle,
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              500),
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
                                                               ),
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 2.0),
-                                                            Container(
-                                                              width: 10,
-                                                              height: 10,
-                                                              transform: Matrix4
-                                                                  .rotationZ(20.3 *
-                                                                      3.1415926535 /
-                                                                      180),
-                                                              decoration:
-                                                                  const BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                color: Colors
-                                                                    .white,
+                                                              const SizedBox(
+                                                                  width: 2.0),
+                                                              Container(
+                                                                width: 10,
+                                                                height: 10,
+                                                                transform: Matrix4
+                                                                    .rotationZ(20.3 *
+                                                                        3.1415926535 /
+                                                                        180),
+                                                                decoration:
+                                                                    const BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: 138.0,
+                                      right: 0.0,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(8),
+                                        width: 36,
+                                        height: 36,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFF7A02D),
+                                          borderRadius:
+                                              BorderRadius.circular(500),
+                                        ),
+                                        child: Container(
+                                          width: 25,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xFF562C2C),
+                                            borderRadius:
+                                                BorderRadius.circular(500),
+                                          ),
+                                          child: Center(
+                                            child: IconButton(
+                                              icon: Icon(Icons.close),
+                                              color: Colors.white,
+                                              padding: EdgeInsets.zero,
+                                              constraints: BoxConstraints(),
+                                              iconSize:
+                                                  16, // Ajuster la taille de l'icône si nécessaire
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
                                           ),
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
+                                  ],
+                                ));
                           },
                         );
                       },
@@ -2603,10 +2797,10 @@ class _TimerOffCanvasBottomPaiementsState
                               ),
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'Terminer',
-                                style: TextStyle(
+                                echec ? 'Réessayer' : 'Terminer',
+                                style: const TextStyle(
                                   color: Color(0xFF853D1A),
                                   fontSize: 24.0,
                                   fontFamily: 'Riffic',

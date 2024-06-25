@@ -35,28 +35,24 @@ class _LotsPageState extends State<LotsPage> {
               Center(
                 child: Image.asset(
                   'assets/images/Logo-KABOU-KABOU.png',
-                  width: 200,
-                  height: 200,
+                  width: 150,
+                  height: 150,
                   fit: BoxFit.contain,
                 ),
               ),
-              const SizedBox(height: 5),
+              
               Card(
                 elevation: 0,
-                color: Colors.transparent,
+                color: Colors.transparent.withOpacity(0.2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                  
                 ),
-                shadowColor: const Color(0x1B114326),
+                shadowColor: const Color(0xFFD8D6E0).withOpacity(0.7),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x26FFFFFF),
-                      ),
-                    ],
+                    
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -96,22 +92,18 @@ class _LotsPageState extends State<LotsPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Card(
                 elevation: 0,
-                color: Colors.transparent,
+                color: Colors.transparent.withOpacity(0.2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                shadowColor: const Color(0x1B114326),
+                shadowColor: const Color(0xFFD8D6E0).withOpacity(0.7),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x26FFFFFF),
-                      ),
-                    ],
+                    
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -151,22 +143,18 @@ class _LotsPageState extends State<LotsPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Card(
                 elevation: 0,
-                color: Colors.transparent,
+                color: Colors.transparent.withOpacity(0.2),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                shadowColor: const Color(0x1B114326),
+                 shadowColor: const Color(0xFFD8D6E0).withOpacity(0.7),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x26FFFFFF),
-                      ),
-                    ],
+                   
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -206,7 +194,7 @@ class _LotsPageState extends State<LotsPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -310,11 +298,16 @@ class _LotsPageState extends State<LotsPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Card(
-                elevation: 4,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                 
+                ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(20),
+                  
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -329,7 +322,7 @@ class _LotsPageState extends State<LotsPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 5),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(79),
@@ -406,17 +399,18 @@ class _LotsPageState extends State<LotsPage> {
                               ),
                               Positioned(
                                 top: 5.0,
-                                right: 8.0,
+                                right: 10.0,
                                 child: Row(
                                   children: [
                                     Container(
-                                      width: 20,
+                                      width: 10,
                                       height: 15,
                                       transform: Matrix4.rotationZ(
-                                          30.02 * 3.1415926535 / 180),
-                                      decoration: const BoxDecoration(
-                                        shape: BoxShape.circle,
+                                          65.02 * 3.1415926535 / 180),
+                                      decoration:  BoxDecoration(
+                                        shape: BoxShape.rectangle,
                                         color: Colors.white,
+                                        borderRadius: BorderRadius.circular(500)
                                       ),
                                     ),
                                     const SizedBox(width: 2.0),
@@ -437,11 +431,12 @@ class _LotsPageState extends State<LotsPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 50),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Container(
                 height: 60,
                 padding: const EdgeInsets.symmetric(horizontal: 16),

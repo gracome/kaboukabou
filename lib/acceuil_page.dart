@@ -19,7 +19,7 @@ class AcceuilPage extends StatefulWidget {
 
 class _AcceuilPageState extends State<AcceuilPage> {
   int _selectedIndex = 0;
- void _onItemTapped(int index) {
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -84,21 +84,20 @@ class _AcceuilPageState extends State<AcceuilPage> {
                   fit: BoxFit.contain,
                 ),
                 Positioned(
-                  right: 20,
-                   child: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => FaqPage()),
-                );
-              },
-              child: Image.asset(
-                'assets/images/Group100.png',
-                width: 32,
-                height: 32,
-              ),
-            )
-                ),
+                    right: 20,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => FaqPage()),
+                        );
+                      },
+                      child: Image.asset(
+                        'assets/images/Group100.png',
+                        width: 32,
+                        height: 32,
+                      ),
+                    )),
               ],
             ),
             Expanded(
@@ -111,8 +110,8 @@ class _AcceuilPageState extends State<AcceuilPage> {
                         Container(
                           width: double.infinity,
                           padding: EdgeInsets.only(right: 16, left: 16),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(0),
                               bottomRight: Radius.circular(0),
                               topLeft: Radius.circular(16),
@@ -120,7 +119,7 @@ class _AcceuilPageState extends State<AcceuilPage> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Color(0x26FFFFFF),
+                                color: Color(0x26FFFFFF).withOpacity(0.1),
                               ),
                             ],
                           ),
@@ -151,12 +150,12 @@ class _AcceuilPageState extends State<AcceuilPage> {
                                   ),
                                 ),
                                 SizedBox(height: 5),
-                                const Center(
+                                 Center(
                                   child: Text(
                                     '+229 91 39 49 20',
                                     style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
+                                      fontSize: 14, 
+                                      color: Colors.white.withOpacity(0.7),
                                       fontFamily: 'Riffic',
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -169,9 +168,10 @@ class _AcceuilPageState extends State<AcceuilPage> {
                                   padding: EdgeInsets.all(16),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(16),
-                                    boxShadow: const [
+                                    boxShadow: [
                                       BoxShadow(
-                                        color: Color(0x26FFFFFF),
+                                        color:
+                                            Color(0x26FFFFFF).withOpacity(0.1),
                                       ),
                                     ],
                                   ),
@@ -198,38 +198,41 @@ class _AcceuilPageState extends State<AcceuilPage> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      '1400pts',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Riffic',
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        foreground: Paint()
-                                                          ..shader =
-                                                              const LinearGradient(
-                                                            begin: Alignment
-                                                                .center,
-                                                            end: Alignment
-                                                                .bottomLeft,
-                                                            colors: [
-                                                              Color(0xFFFF8500),
+                                                    Center(
+                                                      child: ShaderMask(
+                                                        shaderCallback:
+                                                            (Rect bounds) {
+                                                          return const LinearGradient(
+                                                            colors: <Color>[
                                                               Color(0xFFFFFD00),
+                                                              Color(0xFFFF8500),
                                                             ],
                                                             stops: [
                                                               0.0604,
                                                               0.6432
                                                             ],
+                                                            begin: Alignment
+                                                                .topCenter,
+                                                            end: Alignment
+                                                                .bottomCenter,
                                                           ).createShader(
-                                                            const Rect.fromLTWH(
-                                                                0.0,
-                                                                0.0,
-                                                                0.0,
-                                                                14.0),
+                                                              bounds);
+                                                        },
+                                                        child: Text(
+                                                          '1400pts',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Riffic',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Colors
+                                                                .white, // This color is used for fallback
                                                           ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                        ),
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.start,
                                                     ),
                                                     const Text(
                                                       'Score journalier',
@@ -262,39 +265,43 @@ class _AcceuilPageState extends State<AcceuilPage> {
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
+                                                      
                                                   children: [
-                                                    Text(
-                                                      '8200pts',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Riffic',
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        foreground: Paint()
-                                                          ..shader =
-                                                              const LinearGradient(
-                                                            begin: Alignment
-                                                                .center,
-                                                            end: Alignment
-                                                                .bottomLeft,
-                                                            colors: [
-                                                              Color(0xFFFF8500),
+                                                    Center(
+                                                      child: ShaderMask(
+                                                        shaderCallback:
+                                                            (Rect bounds) {
+                                                          return const LinearGradient(
+                                                            colors: <Color>[
                                                               Color(0xFFFFFD00),
+                                                              Color(0xFFFF8500),
                                                             ],
                                                             stops: [
                                                               0.0604,
                                                               0.6432
                                                             ],
+                                                            begin: Alignment
+                                                                .topCenter,
+                                                            end: Alignment
+                                                                .bottomCenter,
                                                           ).createShader(
-                                                            const Rect.fromLTWH(
-                                                                0.0,
-                                                                0.0,
-                                                                0.0,
-                                                                14.0),
+                                                              bounds);
+                                                        },
+                                                        child: const Text(
+                                                          '8200pts',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Riffic',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Colors
+                                                                .white, // This color is used for fallback
                                                           ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                        ),
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.start,
                                                     ),
                                                     const Text(
                                                       'Score Bi-Hebdo',
@@ -328,38 +335,41 @@ class _AcceuilPageState extends State<AcceuilPage> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      '11000pts',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Riffic',
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        foreground: Paint()
-                                                          ..shader =
-                                                              const LinearGradient(
-                                                            begin: Alignment
-                                                                .center,
-                                                            end: Alignment
-                                                                .bottomLeft,
-                                                            colors: [
-                                                              Color(0xFFFF8500),
+                                                    Center(
+                                                      child: ShaderMask(
+                                                        shaderCallback:
+                                                            (Rect bounds) {
+                                                          return const LinearGradient(
+                                                            colors: <Color>[
                                                               Color(0xFFFFFD00),
+                                                              Color(0xFFFF8500),
                                                             ],
                                                             stops: [
                                                               0.0604,
                                                               0.6432
                                                             ],
+                                                            begin: Alignment
+                                                                .topCenter,
+                                                            end: Alignment
+                                                                .bottomCenter,
                                                           ).createShader(
-                                                            const Rect.fromLTWH(
-                                                                0.0,
-                                                                0.0,
-                                                                0.0,
-                                                                14.0),
+                                                              bounds);
+                                                        },
+                                                        child: const Text(
+                                                          '11000pts',
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                'Riffic',
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Colors
+                                                                .white, // This color is used for fallback
                                                           ),
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                        ),
                                                       ),
-                                                      textAlign:
-                                                          TextAlign.start,
                                                     ),
                                                     const Text(
                                                       'Score Global',
@@ -425,7 +435,6 @@ class _AcceuilPageState extends State<AcceuilPage> {
                     )),
               ),
             ),
-            
             Container(
               margin: EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
@@ -500,16 +509,17 @@ class _AcceuilPageState extends State<AcceuilPage> {
                     ),
                     Positioned(
                       top: 5.0,
-                      right: 8.0,
+                      right: 10.0,
                       child: Row(
                         children: [
                           Container(
-                            width: 20,
+                            width: 10,
                             height: 15,
                             transform:
-                                Matrix4.rotationZ(30.02 * 3.1415926535 / 180),
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
+                                Matrix4.rotationZ(65.02 * 3.1415926535 / 180),
+                            decoration:  BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(500),
                               color: Colors.white,
                             ),
                           ),

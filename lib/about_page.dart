@@ -25,7 +25,9 @@ class _AboutPageState extends State<AboutPage> {
             ),
            
           ),
-
+           Container(
+            color: Colors.black.withOpacity(0.6),
+          ),
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
@@ -33,7 +35,7 @@ class _AboutPageState extends State<AboutPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomRight,                 
                   colors: [
-                    Color(0xFF6341D8).withOpacity(0.65),
+                    Color(0xFF6341D8).withOpacity(0.60),
                     Color(0xFF6341D8),
                     Color(0xFF362677),
                                        
@@ -44,7 +46,7 @@ class _AboutPageState extends State<AboutPage> {
           ),
           // Reste du contenu
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -155,10 +157,11 @@ class _AboutPageState extends State<AboutPage> {
                 Card(
                   elevation: 4,
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 20),
                         const Center(
                           child: Text(
                             'À propos',
@@ -258,17 +261,18 @@ class _AboutPageState extends State<AboutPage> {
                                 ),
                                 Positioned(
                                   top: 5.0,
-                                  right: 8.0,
+                                  right: 10.0,
                                   child: Row(
                                     children: [
                                       Container(
-                                        width: 20,
-                                        height: 15,
+                                        width: 10,
+                                        height: 20,
                                         transform: Matrix4.rotationZ(
-                                            30.02 * 3.1415926535 / 180),
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
+                                            65.02 * 3.1415926535 / 180),
+                                        decoration:  BoxDecoration(
+                                          shape: BoxShape.rectangle,
                                           color: Colors.white,
+                                        borderRadius: BorderRadius.circular(30)
                                         ),
                                       ),
                                       const SizedBox(width: 2.0),

@@ -209,7 +209,7 @@ class _ClassementPageState extends State<ClassementPage> {
                       },
                       child: Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                         decoration: BoxDecoration(
                           color: _index == 2
                               ? const Color(0xFFDBD0FF)
@@ -240,7 +240,7 @@ class _ClassementPageState extends State<ClassementPage> {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: const Color(0x26FFFFFF),
+                  color: const Color(0x26FFFFFF).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
@@ -264,26 +264,31 @@ class _ClassementPageState extends State<ClassementPage> {
                           const SizedBox(width: 10),
                           Column(
                             children: [
-                              Text(
-                                '112e',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontFamily: 'Riffic',
-                                  fontWeight: FontWeight.w400,
-                                  foreground: Paint()
-                                    ..shader = const LinearGradient(
-                                      begin: Alignment.center,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                        Color(0xFFFF8500),
+                              Center(
+                                child: ShaderMask(
+                                  shaderCallback: (Rect bounds) {
+                                    return const LinearGradient(
+                                      colors: <Color>[
                                         Color(0xFFFFFD00),
+                                        Color(0xFFFF8500),
                                       ],
                                       stops: [0.0604, 0.6432],
-                                    ).createShader(
-                                      const Rect.fromLTWH(0.0, 0.0, 0.0, 14.0),
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ).createShader(bounds);
+                                  },
+                                  child: const Text(
+                                    '112e',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontFamily: 'Riffic',
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors
+                                          .white, // This color is used for fallback
                                     ),
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ),
-                                textAlign: TextAlign.left,
                               ),
                               const Text(
                                 'Votre rang',
@@ -305,9 +310,9 @@ class _ClassementPageState extends State<ClassementPage> {
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(12),
-                        border: const Border(
+                        border:  Border(
                           left: BorderSide(
-                            color: Color(0x36267733),
+                            color: Color(0x36267733).withOpacity(0.5),
                             width: 1.5,
                           ),
                         ),
@@ -323,24 +328,30 @@ class _ClassementPageState extends State<ClassementPage> {
                           const SizedBox(width: 10),
                           Column(
                             children: [
-                              Text(
-                                '680pts',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontFamily: 'Riffic',
-                                  fontWeight: FontWeight.w400,
-                                  foreground: Paint()
-                                    ..shader = const LinearGradient(
-                                      begin: Alignment.center,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                        Color(0xFFFF8500),
+                              Center(
+                                child: ShaderMask(
+                                  shaderCallback: (Rect bounds) {
+                                    return const LinearGradient(
+                                      colors: <Color>[
                                         Color(0xFFFFFD00),
+                                        Color(0xFFFF8500),
                                       ],
                                       stops: [0.0604, 0.6432],
-                                    ).createShader(
-                                      const Rect.fromLTWH(0.0, 0.0, 0.0, 14.0),
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                    ).createShader(bounds);
+                                  },
+                                  child: const Text(
+                                    '680pts',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontFamily: 'Riffic',
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors
+                                          .white, // This color is used for fallback
                                     ),
+                                    textAlign: TextAlign.start,
+                                  ),
                                 ),
                               ),
                               const Text(

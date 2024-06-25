@@ -7,7 +7,6 @@ void showCustomSnackbar(BuildContext context, String message) {
     builder: (BuildContext context) {
       return Stack(
         children: [
-          // Overlay noir semi-transparent
           Container(
             color: Colors.black.withOpacity(0.5),
           ),
@@ -23,7 +22,6 @@ void showCustomSnackbar(BuildContext context, String message) {
             ),
           ),
 
-          // Snackbar centrée
           Positioned(
             top: MediaQuery.of(context).size.height / 2 -
                 50, // Centrage vertical

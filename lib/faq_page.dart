@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
-class FaqPage extends StatelessWidget {
+class FaqPage extends StatefulWidget {
+  @override
+  _FaqPageState createState() => _FaqPageState();
+}
+
+class _FaqPageState extends State<FaqPage> {
+  List<Item> _data = generateItems();
+  List<Item> _filteredData = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +26,7 @@ class FaqPage extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                 Navigator.pop(context);
+                Navigator.pop(context);
               },
             ),
             const Text(
@@ -50,7 +58,7 @@ class FaqPage extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: ListView(
+        child: Column(
           children: [
             const SizedBox(height: 20),
             Padding(
@@ -73,10 +81,13 @@ class FaqPage extends StatelessWidget {
                             child: TextField(
                               style: TextStyle(color: Colors.white),
                               decoration: InputDecoration(
+                                hintText: 'Rechercher...',
                                 hintStyle: TextStyle(
-                                    color: Colors.white.withOpacity(0.7)),
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
                                 border: InputBorder.none,
                               ),
+                              onChanged: _filterData,
                             ),
                           ),
                         ],
@@ -100,22 +111,23 @@ class FaqPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              child: Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                color: Colors.white,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+            Expanded(
+              child: Container(
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
                   ),
-                ),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child: const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: ExpansionPanelListExample(),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: _filteredData.isEmpty
+                        ? _buildExpansionPanelList(_data)
+                        : _buildExpansionPanelList(_filteredData),
                   ),
                 ),
               ),
@@ -125,67 +137,13 @@ class FaqPage extends StatelessWidget {
       ),
     );
   }
-}
 
-class Item {
-  Item({
-    required this.title,
-    required this.body,
-    this.isExpanded = false,
-  });
-
-  String title;
-  String body;
-  bool isExpanded;
-}
-
-List<Item> generateItems() {
-  List<String> titles = [
-    'Comment récupérer mes gains ?',
-    'Comment acheter des jetons ?',
-    'Comment faire parti des gagnants du jour ?',
-    'J’ai acheter des jetons mais je n’ai pas de question ',
-    'Comment activer un jeu ?',
-    'Quels sont les types de jetons que vous proposer ?'
-  ];
-
-  List<String> bodies = [
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
-    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.'
-  ];
-
-  List<Item> items = [];
-  for (int i = 0; i < titles.length; i++) {
-    items.add(Item(
-      title: titles[i],
-      body: bodies[i],
-    ));
-  }
-  return items;
-}
-
-class ExpansionPanelListExample extends StatefulWidget {
-  const ExpansionPanelListExample({super.key});
-
-  @override
-  State<ExpansionPanelListExample> createState() =>
-      _ExpansionPanelListExampleState();
-}
-
-class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
-  final List<Item> _data = generateItems();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildExpansionPanelList(List<Item> items) {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
-          children: _data.map<Widget>((Item item) {
+          children: items.map<Widget>((Item item) {
             return Card(
                 elevation: 0,
                 color: const Color(0xFFDBD0FF),
@@ -230,4 +188,61 @@ class _ExpansionPanelListExampleState extends State<ExpansionPanelListExample> {
       ),
     );
   }
+
+  void _filterData(String searchTerm) {
+    if (searchTerm.isEmpty) {
+      setState(() {
+        _filteredData.clear();
+      });
+    } else {
+      setState(() {
+        _filteredData = _data
+            .where((item) =>
+                item.title.toLowerCase().contains(searchTerm.toLowerCase()))
+            .toList();
+      });
+    }
+  }
 }
+
+class Item {
+  Item({
+    required this.title,
+    required this.body,
+    this.isExpanded = false,
+  });
+
+  String title;
+  String body;
+  bool isExpanded;
+}
+
+List<Item> generateItems() {
+  List<String> titles = [
+    'Comment récupérer mes gains ?',
+    'Comment acheter des jetons ?',
+    'Comment faire parti des gagnants du jour ?',
+    'J’ai acheter des jetons mais je n’ai pas de question ',
+    'Comment activer un jeu ?',
+    'Quels sont les types de jetons que vous proposer ?'
+  ];
+
+  List<String> bodies = [
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.',
+    'Pour recupérer vos gains veuillez vous rendre à l’agence Kamgoko et vous munir de votre pièce d’identité.'
+  ];
+
+  List<Item> items = [];
+  for (int i = 0; i < titles.length; i++) {
+    items.add(Item(
+      title: titles[i],
+      body: bodies[i],
+    ));
+  }
+  return items;
+}
+

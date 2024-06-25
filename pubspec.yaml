@@ -99,6 +99,7 @@ flutter:
     - assets/images/ClipOvale.png
     - assets/images/Rectangle.png
     - assets/images/RectangleAppbar.png
+    - assets/images/Echec.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
